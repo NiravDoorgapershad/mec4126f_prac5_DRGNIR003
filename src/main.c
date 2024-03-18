@@ -33,7 +33,7 @@ void main(void)
 	// Robot_state initialised
 	robot_state.movement = stop;
 	robot_state.ir_left = LOW;
-	robot_state.ir_right = LOW;
+	robot_state.ir_right = HIGH;
 
 
 	while(1){
@@ -43,10 +43,7 @@ void main(void)
 
 void display(void){
 	//this is a test
-
+//check
 }
 // FUNCTION DEFINITIONS
-void lcd(void){
 
-
-}
