@@ -33,7 +33,8 @@ void main(void)
 	// Robot_state initialised
 	robot_state.movement = stop;
 	robot_state.ir_left = LOW;
-	robot_state.ir_right = HIGH;
+	robot_state.ir_right = LOW;
+	display();
 
 
 	while(1){
@@ -42,8 +43,39 @@ void main(void)
 }
 
 void display(void){
-	//this is a test
-//check
+
+	int state_int = robot_state.movement;
+	char state_string[20];
+	char ir_state[20];
+
+	    switch(state_int) {
+	        case -1:
+	            strcpy(state_string, "back");
+	            break;
+	        case 0:
+	            strcpy(state_string, "stop");
+	            break;
+	        case 1:
+	            strcpy(state_string, "forward");
+	            break;
+	        case 2:
+	            strcpy(state_string, "right");
+	            break;
+	        case 3:
+	            strcpy(state_string, "left");
+	            break;
+	        default:
+	            strcpy(state_string, "unknown");
+	            break;
+	    }
+	sprintf(ir_state, "IR0:%d-IR1:%d", robot_state.ir_left, robot_state.ir_right);
+	init_LCD();
+	lcd_command(CLEAR);
+	lcd_command(TWOLINE_MODE);
+
+	lcd_putstring(state_string);
+	lcd_command(LINE_TWO);
+	lcd_putstring(ir_state);
+
 }
-// FUNCTION DEFINITIONS
 

@@ -327,7 +327,7 @@ void pulse_strobe(void)
 // DESCRIPTION: A delay used by the LCD functions.
 //====================================================================
 
-static void delay(unsigned int microseconds)
+void delay(unsigned int microseconds)
 {
 	  volatile unsigned int counter;
 	  microseconds *= 3;
