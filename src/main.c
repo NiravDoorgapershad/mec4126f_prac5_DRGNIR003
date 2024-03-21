@@ -88,3 +88,20 @@ void init_GPIOA(void){
 	GPIOA -> PUPDR |= GPIO_PUPDR_PUPDR1_1;
 }
 
+void sensor_polling(void){
+
+	if(GPIOA->IDR & GPIO_IDR_0 ){// if its high
+		robot_state.ir_left = HIGH;
+	}
+	else{
+		robot_state.ir_left = LOW;
+
+	}
+	if(GPIOA->IDR & GPIO_IDR_1 ){//if its high
+		robot_state.ir_right = HIGH;
+    }
+	else{
+		robot_state.ir_right = LOW;
+	}
+
+}
