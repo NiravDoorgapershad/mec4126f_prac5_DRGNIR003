@@ -35,6 +35,7 @@ void main(void)
 	robot_state.ir_left = LOW;
 	robot_state.ir_right = LOW;
 	display();
+	init_GPIOA();
 
 
 	while(1){
@@ -77,5 +78,13 @@ void display(void){
 	lcd_command(LINE_TWO);
 	lcd_putstring(ir_state);
 
+}
+
+void init_GPIOA(void){
+	RCC->AHBENR  |=  RCC_AHBENR_GPIOAEN;
+	GPIOA -> MODER &= ~GPIO_MODER_MODER0_0;
+	GPIOA -> MODER &= ~GPIO_MODER_MODER1_0;
+	GPIOA -> PUPDR |= GPIO_PUPDR_PUPDR0_1;
+	GPIOA -> PUPDR |= GPIO_PUPDR_PUPDR1_1;
 }
 
