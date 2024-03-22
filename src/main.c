@@ -36,9 +36,15 @@ void main(void)
 	robot_state.ir_right = LOW;
 	display();
 	init_GPIOA();
+	init_SW3();
+	init_external_interrupts();
+	init_GPIOB();
 
 
 	while(1){
+		sensor_polling();
+		delay(100000);
+		display();
 
 	}
 }
@@ -105,3 +111,11 @@ void sensor_polling(void){
 	}
 
 }
+
+void init_SW3(void){
+	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
+	GPIOA -> MODER &= ~GPIO_MODER_MODER3;// set pushbuttons to input mode
+	GPIOA -> PUPDR |= GPIO_PUPDR_PUPDR3_0;//enable the pull up resistor for button three
+}
+
+
