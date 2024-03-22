@@ -126,3 +126,9 @@ void init_external_interrupts(void){
 	NVIC_EnableIRQ(EXTI2_3_IRQn);//enable the ext interrupt on nvic
 }
 
+void init_GPIOB(void){
+    RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
+    GPIOB->MODER |= (GPIO_MODER_MODER2_0 | GPIO_MODER_MODER6_0); // Set MODER bits to 01 (output mode)
+}
+
+
