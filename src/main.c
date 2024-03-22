@@ -118,4 +118,11 @@ void init_SW3(void){
 	GPIOA -> PUPDR |= GPIO_PUPDR_PUPDR3_0;//enable the pull up resistor for button three
 }
 
+void init_external_interrupts(void){
+	RCC-> APB2ENR |= RCC_APB2ENR_SYSCFGCOMPEN;//enable clock for sysconfig
+	SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI3_PA;//route PA3 to EXTI3
+	EXTI->IMR |= EXTI_IMR_MR3;//unmask the interrupt for pa3
+	EXTI->FTSR |= EXTI_FTSR_TR3;//falling edge trigger
+	NVIC_EnableIRQ(EXTI2_3_IRQn);//enable the ext interrupt on nvic
+}
 
