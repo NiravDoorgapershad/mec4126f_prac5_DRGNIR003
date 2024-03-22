@@ -131,4 +131,26 @@ void init_GPIOB(void){
     GPIOB->MODER |= (GPIO_MODER_MODER2_0 | GPIO_MODER_MODER6_0); // Set MODER bits to 01 (output mode)
 }
 
+void EXTI2_3_IRQnHandler (void){
+
+	if(EXTI->PR &= EXTI_PR_PR3){
+		if (robot_state.movement == stop){//if pushbutton 3 is pressed and state is stop
+			robot_state.movement = forward;
+			GPIOB->ODR = 0x44;
+			display();
+		}
+
+		else if(robot_state.movement == forward){//if pushbutton 3 is pressed and state is stop
+			robot_state.movement = stop;
+			GPIOB->ODR = 0x00;
+			display();
+		}
+
+	}
+
+	EXTI->PR |= EXTI_PR_PR3;
+}
+
+
+
 
